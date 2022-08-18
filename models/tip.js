@@ -43,9 +43,6 @@ const tipSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  suspect: {
-    type: String,
-  },
   tip_score:{
     type: Number,
   },
