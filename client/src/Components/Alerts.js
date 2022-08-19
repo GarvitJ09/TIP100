@@ -17,16 +17,11 @@ const Frame = ({
   zip,
 }) => {
   const navigate = useNavigate();
-  const deleteRequest = async () => {
-    const res = await axios
-      .delete(`http://localhost:5000/api/alerts/${id}`)
-      .catch((err) => console.log(err));
-  };
-  const handleDelete = () => {
-    deleteRequest().then = () => {};
+  const handleView = (e) => {
+    navigate(`/alerts/${id}`);
   };
   return (
-    <Card style={{ width: "18rem", margin: "10px" }}>
+    <Card style={{ maxWidth: "30vw" }}>
       <Card.Img variant="top" src={image} />
       <Card.Body>
         <Card.Title>{group}</Card.Title>
@@ -45,8 +40,8 @@ const Frame = ({
         </ListGroup.Item>
       </ListGroup>
       <Card.Body>
-        <button onClick={handleDelete} className="btn btn-secondary">
-          Delete
+        <button onClick={handleView} className="btn btn-dark">
+          View
         </button>
       </Card.Body>
     </Card>

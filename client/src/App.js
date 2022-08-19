@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { authActions } from "./Components/store";
 import { useEffect } from "react";
 import Alerts from "./Components/Alerts";
-import { TipDetails } from "./Components/TipDetails";
+import { AlertDetails } from "./Components/AlertDetails";
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,7 +35,11 @@ function App() {
               <Route exact path="/tippers" element={<Tippers />}></Route>
               <Route exact path="/tips" element={<Tips />}></Route>
               <Route exact path="/alerts" element={<Alerts />}></Route>
-              <Route exact path="/tipDetails" element={<TipDetails />}></Route>
+              <Route
+                exact
+                path="/alerts/:id"
+                element={<AlertDetails />}
+              ></Route>
               <Route
                 exact
                 path="/createalert"
