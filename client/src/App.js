@@ -12,6 +12,7 @@ import { authActions } from "./Components/store";
 import { useEffect } from "react";
 import Alerts from "./Components/Alerts";
 import { AlertDetails } from "./Components/AlertDetails";
+import { TipDetails } from "./Components/TipDetails";
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,6 +41,7 @@ function App() {
                 path="/alerts/:id"
                 element={<AlertDetails />}
               ></Route>
+              <Route exact path="/tips/:id" element={<TipDetails />}></Route>
               <Route
                 exact
                 path="/createalert"

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Button,
   Card,
@@ -7,10 +7,9 @@ import {
   Row,
   Tooltip,
 } from "react-bootstrap";
+import "./TipPagination.css";
 import Sidebar from "./Sidebar";
-import TipPagination from "./TipPagination";
-import Pagination from "./Pagination";
-import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const Frame = ({ group, heading, date, score, description }) => {
   const renderTooltip = (props) => (
@@ -55,58 +54,31 @@ const Frame = ({ group, heading, date, score, description }) => {
     </Card>
   );
 };
-const Tips = () => {
+const TipPagination = ({ info, loading }) => {
+  const navigate = useNavigate();
+  const handleView = (id) => {
+    console.log("clicked");
+    navigate(`/tips/${id}`);
+  };
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       Score
     </Tooltip>
   );
-  const [info, setInfo] = useState([]);
-  const sendRequest = async () => {
-    setLoading(true);
-    const res = await axios
-      .get("https://tip100.herokuapp.com/get_all_tips")
-      .catch((err) => console.log(err));
-    const data = await res.data;
-    setLoading(false);
-    console.log(data);
-    return data;
-  };
-  useEffect(() => {
-    sendRequest().then((data) => setInfo(data.chain));
-  }, []);
-  console.log(info);
-  const [searchTerm, setSearchTerm] = useState("");
-  const setsearch = (e) => {
-    setSearchTerm(e.target.value);
-  };
-  const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(8);
-  const indexOfLastPost = currentPage * postsPerPage;
 
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = info.slice(indexOfFirstPost, indexOfLastPost);
-  const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
   return (
-    <div>
-      <TipPagination info={currentPosts} loading={loading}></TipPagination>
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={info.length}
-        paginate={paginate}
-      />
-
-      {/* <Row>
+    <div className="dashboard-parent-div">
+      <Row>
         <Col lg={2}>
           <Sidebar />
         </Col>
         <Col className="dashboard-home-content" lg={10}>
           <h4>Tips</h4>
 
-          <div
+          {/* <div
             className="d-flex "
             style={{ float: "right", marginRight: "30px" }}
           >
@@ -126,7 +98,7 @@ const Tips = () => {
           </div>
           <br />
           <br />
-          <br />
+          <br /> */}
           <div>
             <table class="table">
               <thead>
@@ -153,22 +125,36 @@ const Tips = () => {
                     }}
                   >
                     <td>
-                      <th scope="row">{data.group}</th>
+                      <th scope="row">{data.crimeType}</th>
                       <tr scope="row">{data.description.slice(0, 25)}...</tr>
                     </td>
-                    <td>{data.date}</td>
+                    <td>{data.timestamp.slice(0, 10)}</td>
                     <td>
                       <OverlayTrigger
                         placement="right"
                         delay={{ show: 250, hide: 400 }}
                         overlay={renderTooltip}
                       >
-                        <Button variant="secondary">{data.score}</Button>
+                        <Button
+                          variant="danger"
+                          style={{
+                            background: "none",
+                            color: "black",
+                            border: "none",
+                          }}
+                        >
+                          {data.score}
+                        </Button>
                       </OverlayTrigger>
                     </td>
                     <td>
                       <Card.Text>
-                        <Button variant="danger">View</Button>
+                        <Button
+                          onClick={() => handleView(data._id)}
+                          variant="danger"
+                        >
+                          View
+                        </Button>
                       </Card.Text>
                     </td>
                     <td>
@@ -179,8 +165,8 @@ const Tips = () => {
                   </tr>
                 ))}
               </tbody>
-            </table> */}
-      {/* {info.map((data) => (
+            </table>
+            {/* {info.map((data) => (
               <Frame
                 group={data.group}
                 heading={data.heading}
@@ -189,11 +175,11 @@ const Tips = () => {
                 date={data.date}
               />
             ))} */}
-      {/* </div>
+          </div>
         </Col>
-      </Row> */}
+      </Row>
     </div>
   );
 };
 
-export default Tips;
+export default TipPagination;
