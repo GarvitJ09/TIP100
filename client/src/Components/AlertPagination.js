@@ -5,39 +5,39 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Sidebar from "./Sidebar";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-
+import no_media_img from "../Assets/no_media_img.png";
 const Frame = ({
-  id,
-  group,
+  index,
+  crimeType,
+  crimeTime,
   description,
-  headline,
-  image,
+  score,
+  mediaURL,
   address,
-  city,
-  state,
-  zip,
+  urgency,
+  uid,
 }) => {
   const navigate = useNavigate();
   const handleView = (e) => {
-    navigate(`/alerts/${id}`);
+    navigate(`/alerts/${index}`);
   };
   return (
     <Card>
-      <Card.Img variant="top" src={image} />
+      <Card.Img
+        className="img-fluid"
+        variant="top"
+        src={mediaURL == "" ? no_media_img : mediaURL}
+      />
       <Card.Body>
-        <Card.Title>{group}</Card.Title>
-        <Card.Title>{headline}</Card.Title>
+        <Card.Title>{crimeType}</Card.Title>
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item>
           <Card.Text>{description}</Card.Text>
         </ListGroup.Item>
+        <ListGroup.Item>{address}</ListGroup.Item>
         <ListGroup.Item>
-          {address}
-          <br></br>
-          {city}&nbsp;
-          {state}&nbsp;
-          {zip}
+          Score : {score == 0 ? "Calculating Score" : score}
         </ListGroup.Item>
       </ListGroup>
       <Card.Body>
@@ -104,20 +104,25 @@ const alertPagination = ({ info, loading }) => {
           <br></br>
           <br></br>
           <br></br>
-          <div className="grid-container">
-            {info.map((data) => (
-              <Frame
-                id={data._id}
-                group={data.group}
-                description={data.description}
-                headline={data.headline}
-                image={data.image}
-                address={data.address}
-                city={data.city}
-                state={data.state}
-                zip={data.zip}
-              />
-            ))}
+          <div
+            className="grid-container"
+            style={{ height: "66vh", overflowY: "auto", overflowX: "hidden" }}
+          >
+            {info
+              .filter((data) => data.isAlert === 1 && data.view == 1)
+              .map((data) => (
+                <Frame
+                  index={data.index}
+                  crimeType={data.crimeType}
+                  description={data.description}
+                  mediaURL={data.mediaURL}
+                  address={data.address}
+                  crimeTime={data.crimeTime}
+                  urgency={data.urgency}
+                  uid={data.uid}
+                  score={data.score}
+                />
+              ))}
           </div>
         </Col>
       </Row>

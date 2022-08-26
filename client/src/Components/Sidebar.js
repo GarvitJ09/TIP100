@@ -129,7 +129,7 @@ import {
   FaPowerOff,
 } from "react-icons/fa";
 import { IoIosLaptop } from "react-icons/io";
-
+import logo from "../Assets/logo.jpeg";
 import "./Sidebar.css";
 import { Link, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -155,8 +155,7 @@ function Sidebar() {
     <div className="sidebar-parent-div">
       <div className="sidebar-content-div">
         <div className="sidebar-logo-div">
-          {/* <img src={logo} alt="LOGO" /> */}
-          <h4>Tip 100</h4>
+          <img src={logo} alt="LOGO" />
         </div>
         <div className="sidebar-links-div">
           <Link to="/" className="sidebar-link">
@@ -187,7 +186,7 @@ function Sidebar() {
               <p>Alerts</p>
             </div>
           </Link>
-          <Link to="/createalert" className="sidebar-link">
+          {/* <Link to="/createalert" className="sidebar-link">
             <div
               className={`sidebar-item ${
                 isActive(history, "/createalert") && "active"
@@ -196,7 +195,7 @@ function Sidebar() {
               <RiPencilLine className="sidebar-icon" />
               <p>Create Alert</p>
             </div>
-          </Link>
+          </Link> */}
           <Link to="/tippers" className="sidebar-link">
             <div
               className={`sidebar-item ${

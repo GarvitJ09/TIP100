@@ -56,6 +56,7 @@ const Frame = ({ group, heading, date, score, description }) => {
   );
 };
 const Tips = () => {
+  const [time, setTime] = useState(Date.now());
   const renderTooltip = (props) => (
     <Tooltip id="button-tooltip" {...props}>
       Score
@@ -65,7 +66,7 @@ const Tips = () => {
   const sendRequest = async () => {
     setLoading(true);
     const res = await axios
-      .get("https://tip100.herokuapp.com/get_all_tips")
+      .get("https://tip100.herokuapp.com/getAllTips")
       .catch((err) => console.log(err));
     const data = await res.data;
     setLoading(false);
@@ -74,13 +75,17 @@ const Tips = () => {
   };
   useEffect(() => {
     sendRequest().then((data) => setInfo(data.chain));
+    const interval = setInterval(() => setTime(Date.now()), 5000);
+    return () => {
+      clearInterval(interval);
+    };
   }, []);
   console.log(info);
   const [searchTerm, setSearchTerm] = useState("");
   const setsearch = (e) => {
     setSearchTerm(e.target.value);
   };
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(8);
   const indexOfLastPost = currentPage * postsPerPage;

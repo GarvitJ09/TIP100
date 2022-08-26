@@ -118,7 +118,7 @@
 }
 .grid-container {
     display: grid;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: 25vw 25vw 25vw;
     grid-gap: 15px;  
   } 
 
@@ -210,5 +210,9 @@ tbody {
     height: 70vh;       /* Just for the demo          */
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: hidden;  /* Hide the horizontal scroll */
+}
+.grid-child{
+  align-items: center;
+  justify-content: center;
 }
   

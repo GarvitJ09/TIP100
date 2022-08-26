@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import dashboard from "../Assets/dashboard.jpeg";
 import { Card, Col, Row } from "react-bootstrap";
 import {
   RiShoppingCart2Line,
@@ -67,8 +68,17 @@ function Home() {
         <Col lg={2}>
           <Sidebar />
         </Col>
-        <Col className="dashboard-home-content" lg={10}>
-          <h4>Dashboard</h4>
+        <Col
+          className="dashboard-home-content"
+          style={{ display: "flex", justifyContent: "center" }}
+          lg={10}
+        >
+          <img
+            src={dashboard}
+            style={{ maxHeight: "80vh" }}
+            className="img-fluid"
+          ></img>
+          {/* <h4>Dashboard</h4>
           <p>Here's an overview of your online business.</p>
           <Row>
             <Col>
@@ -170,18 +180,8 @@ function Home() {
                   customer details
                 </p>
               </Card>
-            </Col>
-            {/* <Col>
-              <Card className="dashboard-action-card">
-                <RiFeedbackLine className="action-icon" />
-                <h4>Complaints & Feedbacks</h4>
-                <p>
-                  <Link to="/complaints">Click here</Link> view complaints and
-                  feedbacks
-                </p>
-              </Card>
-            </Col> */}
-          </Row>
+            </Col> 
+          </Row> */}
         </Col>
       </Row>
     </div>

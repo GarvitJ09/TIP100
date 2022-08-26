@@ -1,35 +1,31 @@
 import mongoose from "mongoose";
 
 const alertSchema = new mongoose.Schema({
-  group: {
+  crimeTime: {
     type: String,
-    required: true,
   },
-  headline: {
+  uid: {
     type: String,
-    required: true,
+  },
+  mediaURL: [
+    {
+      type: String,
+    },
+  ],
+  crimeType: {
+    type: String,
   },
   description: {
     type: String,
   },
-  image: {
-    type: String,
-  },
   address: {
     type: String,
-    required: true,
   },
-  city: {
-    type: String,
-    required: true,
+  score: {
+    type: Number,
   },
-  state: {
+  urgency: {
     type: String,
-    required: true,
-  },
-  zip: {
-    type: String,
-    required: true,
   },
 });
 

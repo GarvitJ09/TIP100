@@ -5,7 +5,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import storage from "../firebase-config";
+import { storage } from "../firebase-config";
 import Sidebar from "./Sidebar";
 const CreateAlert = () => {
   const [inputs, setInputs] = useState({
@@ -32,14 +32,14 @@ const CreateAlert = () => {
   const sendRequest = async (url) => {
     const res = await axios
       .post("http://localhost:5000/api/alerts/createalert", {
-        group: inputs.group,
-        headline: inputs.headline,
-        description: inputs.description,
-        image: url,
-        address: inputs.address,
-        city: inputs.city,
-        state: inputs.state,
-        zip: inputs.zip,
+        crimeType: data.crimeType,
+        description: data.description,
+        mediaURL: data.mediaURL,
+        crimeTime: data.crimeTime,
+        urgency: data.urgency,
+        uid: data.uid,
+        score: data.score,
+        address: data.address,
       })
       .catch((err) => console.log(err));
     const data = await res.data;

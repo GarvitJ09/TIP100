@@ -55,15 +55,31 @@ export default function Alerts() {
   const sendRequest = async () => {
     setLoading(true);
     const res = await axios
-      .get("http://localhost:5000/api/alerts")
+      .get("https://tip100.herokuapp.com/getAllTips")
       .catch((err) => console.log(err));
     const data = await res.data;
+    console.log(data);
     setLoading(false);
     return data;
   };
   useEffect(() => {
-    sendRequest().then((data) => setInfo(data.alerts));
+    sendRequest().then((data) => setInfo(data.chain));
+    console.log(info);
   }, []);
+
+  // const [info, setInfo] = useState([]);
+  // const sendRequest = async () => {
+  //   setLoading(true);
+  //   const res = await axios
+  //     .get("http://localhost:5000/api/alerts")
+  //     .catch((err) => console.log(err));
+  //   const data = await res.data;
+  //   setLoading(false);
+  //   return data;
+  // };
+  // useEffect(() => {
+  //   sendRequest().then((data) => setInfo(data.alerts));
+  // }, []);
   console.log(info);
   const [searchTerm, setSearchTerm] = useState("");
   const setsearch = (e) => {
@@ -71,7 +87,7 @@ export default function Alerts() {
   };
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(8);
+  const [postsPerPage, setPostsPerPage] = useState(4);
   const indexOfLastPost = currentPage * postsPerPage;
 
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -82,12 +98,12 @@ export default function Alerts() {
   };
   return (
     <div className="dashboard-parent-div">
-      <AlertPagination info={currentPosts} loading={loading}></AlertPagination>
-      <Pagination
+      <AlertPagination info={info} loading={loading}></AlertPagination>
+      {/* <Pagination
         postsPerPage={postsPerPage}
         totalPosts={info.length}
         paginate={paginate}
-      />
+      /> */}
       {/* <Row>
         <Col lg={2}>
           <Sidebar></Sidebar>

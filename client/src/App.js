@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import Alerts from "./Components/Alerts";
 import { AlertDetails } from "./Components/AlertDetails";
 import { TipDetails } from "./Components/TipDetails";
+import { TipperDetails } from "./Components/TipperDetails";
 function App() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -46,6 +47,11 @@ function App() {
                 exact
                 path="/createalert"
                 element={<CreateAlert />}
+              ></Route>
+              <Route
+                exact
+                path="/tippers/:id"
+                element={<TipperDetails />}
               ></Route>
             </>
           )}

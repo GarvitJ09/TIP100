@@ -11,16 +11,11 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
   console.log(pageNumbers);
   return (
     <div
-      style={
-        {
-          // display: "flex",
-          // justifyContent: "center",
-          // alignItems: "center",
-          // position: "fixed",
-          // margin: "auto",
-          // bottom: "4px",
-        }
-      }
+      style={{
+        position: "fixed",
+        margin: "auto 45vw",
+        bottom: "5px",
+      }}
     >
       <nav>
         <ul className="pagination">

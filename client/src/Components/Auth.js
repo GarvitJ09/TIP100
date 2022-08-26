@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { authActions } from "./store";
 import { useNavigate } from "react-router-dom";
+import logo from "../Assets/logo.jpeg";
 const Auth = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -70,21 +71,25 @@ const Auth = () => {
     //     </div>
     //   </form>
     // </div>
-    <div className="vh-100">
+    <div
+      className="vh-100"
+      style={{
+        backgroundImage:
+          "linear-gradient(167deg, rgba(244,196,48,1) 29%, rgba(255,255,255,1) 48%, rgba(0,255,0,1) 83%)",
+      }}
+    >
       <section className="vh-100">
-        <div className="container-fluid vh-100 bg-dark">
+        <div className="container-fluid vh-100  ">
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col-md-9 col-lg-6 col-xl-5">
-              <img
-                src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
-                className="img-fluid"
-                alt="Sample image"
-              />
+              <img src={logo} className="img-fluid" alt="Sample image" />
             </div>
             <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
               <form onSubmit={handleSubmit}>
                 <div className="d-flex flex-row align-items-center justify-content-center mb-3">
-                  <p className="lead fw-normal mb-0 me-3 text-light">Sign in</p>
+                  <p className="lead fw-normal mb-0 me-3 text-danger">
+                    Sign in
+                  </p>
                 </div>
 
                 <div className="form-outline mb-4">
@@ -96,7 +101,7 @@ const Auth = () => {
                     className="form-control form-control-lg"
                     placeholder="email address"
                   />
-                  <label className="form-label text-light" for="form3Example3">
+                  <label className="form-label text-danger" for="form3Example3">
                     Email address
                   </label>
                 </div>
@@ -110,7 +115,7 @@ const Auth = () => {
                     className="form-control form-control-lg"
                     placeholder="password"
                   />
-                  <label className="form-label text-light" for="form3Example4">
+                  <label className="form-label text-danger" for="form3Example4">
                     Password
                   </label>
                 </div>
@@ -119,7 +124,7 @@ const Auth = () => {
                   <button
                     onSubmit={handleSubmit}
                     type="submit"
-                    className="btn btn-secondary btn-lg"
+                    className="btn btn-danger btn-lg"
                     style={{ paddingLeft: "2.5rem", paddingRight: "2.5rem" }}
                   >
                     Login
